@@ -1,3 +1,5 @@
+os = require '../sys/os'
+
 class NAR.Servant extends NB.Module
 	constructor: ->
 		super
@@ -9,4 +11,6 @@ class NAR.Servant extends NB.Module
 			sock.on 'exec', @exec
 
 	exec: (data) =>
-		console.log data
+		switch data
+			when 'g'
+				os.spawn 'open', ['/Applications/Google\ Chrome.app', 'http://google.com.hk']
