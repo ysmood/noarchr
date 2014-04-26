@@ -3,6 +3,12 @@
 
 _.mixin(
 
+	u: ->
+		###
+			url prefix
+		###
+		NB.conf.url_prefix
+
 	msg_box: (options) ->
 		###
 			options: {

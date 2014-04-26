@@ -3,6 +3,12 @@
 # Dump error information.
 _.mixin
 
+	u: ->
+		###
+			url prefix
+		###
+		NB.conf.url_prefix
+
 	sandbox: (func, err_msg) ->
 		try
 			func()

@@ -3,7 +3,7 @@
 <head>
 	<?- head ?>
 
-	<?- _.css(css) ?>
+	<?- _.css(_.u() + name + '/css/' + name + '.css') ?>
 
 	<title><?= _.l(title.toUpperCase()) ?></title>
 </head>
@@ -19,7 +19,7 @@
 
 	<?- foot ?>
 
-	<?- _.js(js) ?>
+	<?- _.js(_.u() + name + '/js/' + name + '.js') ?>
 
 </body>
 </html>

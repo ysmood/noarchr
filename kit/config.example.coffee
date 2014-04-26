@@ -23,10 +23,13 @@ NB.conf = {
 
 	mode: 'development'
 
+	url_prefix: '/'
+
 }
 
 NB.conf.client_conf = {
 
+	url_prefix: NB.conf.url_prefix
 	enable_socket_io: NB.conf.enable_socket_io
 	auto_reload_page: NB.conf.auto_reload_page
 	current_lang: NB.conf.current_lang

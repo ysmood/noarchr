@@ -14,8 +14,7 @@ class <%= class_name %> extends NB.Module
 			title: @name
 			head: @r.render('assets/ejs/head.ejs')
 			foot: @r.render('assets/ejs/foot.ejs')
-			css: "/#{@name}/css/#{@name}.css"
-			js: "/#{@name}/js/#{@name}.js"
+			name: @name
 		}
 
 		# Render page.
