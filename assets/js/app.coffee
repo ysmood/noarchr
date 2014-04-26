@@ -29,11 +29,8 @@ class NB.Nobone
 
 	init_auto_reload_page: ->
 		init = ->
-			sock = io.connect(location.origin + '/auto_reload_page')
+			sock = io.connect(_.u() + 'auto_reload_page')
 			sock.on 'code_reload', (path) ->
 				location.reload()
 
-		if not NB.conf.enable_socket_io
-			require ['/socket.io/socket.io.js'], init
-		else
-			init()
+		require ['/socket.io/socket.io.js'], init

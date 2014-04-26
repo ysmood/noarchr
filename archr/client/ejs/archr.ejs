@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<?- head ?>
+
+	<?- _.css(_.u() + name + '/css/' + name + '.css') ?>
+
+	<title><?= _.l(name.toUpperCase()) ?></title>
+</head>
+<body>
+
+	<div id="main">
+
+		<div class="input-group">
+			<span class="input-group-addon">
+				Archr
+			</span>
+			<input id="cmder" type="text" class="form-control" placeholder="command">
+		</div>
+
+	</div>
+
+	<?- foot ?>
+
+	<?- _.js(_.u() + name + '/js/' + name + '.js') ?>
+
+	<script type="text/javascript">
+		NAR.archr = new NAR.Archr();
+	</script>
+
+</body>
+</html>
