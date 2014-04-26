@@ -12,7 +12,7 @@ class NAR.Servant extends NB.Module
 		io = NB.io.of('/cmd').on 'connection', (sock) =>
 			sock.on 'exec', @exec
 
-	exec: (data) =>
-		switch data
+	exec: (cmd) =>
+		switch cmd
 			when 'g'
 				os.spawn @open_cmd, ['/Applications/Google\ Chrome.app', 'http://google.com.hk']
