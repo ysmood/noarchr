@@ -131,38 +131,6 @@ _.mixin
 			task(check, k)
 		)
 
-	walk_files: (root, iterator) ->
-		###
-			iterator: (root+filename, filename) ->
-		###
-
-		fs = require 'fs-extra'
-
-		f_list = fs.readdirSync(root)
-
-		for f in f_list
-			path = root + '/' + f
-			if not fs.lstatSync(path).isFile() or
-			f[0] != '.'
-				iterator(path, f)
-
-		return
-
-	walk_dirs: (root, iterator) ->
-		###
-			iterator: (root+dir, dir) ->
-		###
-
-		fs = require 'fs-extra'
-
-		dir_list = fs.readdirSync(root)
-
-		for dir in dir_list
-			path = root + '/' + dir
-			if fs.lstatSync(path).isDirectory() or
-			dir[0] != '.'
-				iterator path, dir
-
 	l: (english) ->
 		###
 			Translate English to current language.

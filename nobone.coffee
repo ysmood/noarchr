@@ -63,20 +63,6 @@ class NB.Nobone extends NB.Module
 		require './sys/api'
 		NB.api = new NB.Api
 
-	init_plugins: ->
-		require './sys/plugin'
-
-		NB.Plugins = {}
-		NB.plugins = {}
-
-		_.walk_files 'plugins', (path) ->
-			require '../' + path
-
-		for name, Plugin of NB.Plugins
-			_.valid_class(Plugin)
-			plugin = new Plugin
-			NB.plugins[name.toLowerCase()] = plugin
-
 	init_auto_reload_page: ->
 		# Auto reload page when file changed.
 

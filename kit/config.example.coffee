@@ -13,7 +13,6 @@ NB.conf = {
 	modules: {
 		'NB.Database': './sys/modules/database'
 		'NB.Storage': './sys/modules/storage'
-		'NB.Api': './sys/modules/api'
 	}
 
 	db_filename: 'var/NB.db'
