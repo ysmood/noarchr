@@ -2,11 +2,12 @@
 class NAR.Archr
 	constructor: ->
 		require([
-			_.u() + 'socket.io/socket.io.js'
 			_.u() + 'ys-keymaster/keymaster.js'
 		], =>
 			@init_cmder()
 		)
+
+		@init_cmd_list()
 
 		@init_cmd_add()
 
@@ -22,6 +23,13 @@ class NAR.Archr
 		key 'enter', @exec_cmd
 
 		@$cmder.focus()
+
+		$(window).focus =>
+			@$cmder.focus()
+
+	init_cmd_list: ->
+		$.get('/cmd/get_all').done (@cmd_list) =>
+			console.log ">> cmd list get."
 
 	init_cmd_add: ->
 		self = @
@@ -42,7 +50,7 @@ class NAR.Archr
 					{
 						name: 'OK'
 						clicked: ->
-							self.add_cmd editor.getValue()
+							self.add_cmd editor.val()
 							$msg_box.modal('hide')
 					}
 				]
@@ -52,7 +60,7 @@ class NAR.Archr
 				editor = self.init_editor $editor, $type.val()
 			$type.change()
 
-	init_editor: ($elem, type) ->
+	init_editor: ($elem, type, cmd) ->
 		schema = {
 			title: 'Cmd'
 			type: 'object'
@@ -92,6 +100,13 @@ class NAR.Archr
 			iconlib: 'fontawesome4'
 			schema
 		}
+
+		editor.val = ->
+			cmd = editor.getValue()
+			cmd.exec_type = type
+			return cmd
+
+		return editor
 
 	add_cmd: (cmd) ->
 		$.post('/cmd/add', cmd)

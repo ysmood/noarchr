@@ -27,7 +27,7 @@ class NAR.Servant extends NB.Module
 	put_cmd: (req, res) =>
 		cmd = new NAR.Cmd req.body
 		NB.database.nedb.update { type: 'cmd', name: req.params.name }, cmd, (err, num) ->
-			console.log ">> Put cmd: #{doc.name}".cyan
+			console.log ">> Put cmd: #{req.params.name}".cyan
 			res.send 200
 
 	del_cmd: (req, res) =>
@@ -37,8 +37,8 @@ class NAR.Servant extends NB.Module
 
 	exec_cmd: (req, res) =>
 		NB.database.nedb.findOne { type: 'cmd', name: req.params.name }, (err, doc) ->
-			if err
-				console.error err
+			if err or not doc
+				console.error "Exec cmd '#{req.params.name}': #{err}".red
 				res.send 500
 				return
 
