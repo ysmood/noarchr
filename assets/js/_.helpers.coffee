@@ -30,6 +30,7 @@ _.mixin(
 		defaults =
 			title: _.l('Title')
 			body: ''
+			is_capture_enter: true
 			btn_list: [
 				name: _.l('Close')
 				class: ''
@@ -56,13 +57,14 @@ _.mixin(
 		)
 
 		# Default button
-		$msg_box.keypress (e) ->
-			if e.keyCode == 13
-				btn = _.find opts.btn_list, (el) -> el.is_default
-				if btn
-					btn.clicked?()
-				else
-					_.last(opts.btn_list).clicked?()
+		if opts.is_capture_enter
+			$msg_box.keypress (e) ->
+				if e.keyCode == 13
+					btn = _.find opts.btn_list, (el) -> el.is_default
+					if btn
+						btn.clicked?()
+					else
+						_.last(opts.btn_list).clicked?()
 
 		$msg_box.on 'shown.bs.modal', ->
 			$msg_box.find('input:first').focus()

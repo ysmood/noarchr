@@ -1,18 +1,32 @@
-os = require '../sys/os'
+require './cmd'
 
 class NAR.Servant extends NB.Module
 	constructor: ->
 		super
 
-		@init_cmder()
+		NB.app.get '/cmd/exec', @exec_cmd
+		NB.app.post '/cmd/add', @add_cmd
 
-	init_cmder: ->
-		@open_cmd = 'open'
+	add_cmd: (req, res) =>
+		cmd = new NAR.Cmd req.body
+		NB.database.nedb.insert cmd, (err, doc) ->
+			console.log ">> Add cmd: #{doc.name}".cyan
+			res.send 200
 
-		io = NB.io.of('/cmd').on 'connection', (sock) =>
-			sock.on 'exec', @exec
+	exec_cmd: (req, res) =>
+		NB.database.nedb.findOne { type: 'cmd', name: req.query.name }, (err, doc) ->
+			if err
+				console.error err
+				res.send 500
+				return
 
-	exec: (cmd) =>
-		switch cmd
-			when 'g'
-				os.spawn @open_cmd, ['/Applications/Google\ Chrome.app', 'http://google.com.hk']
+			doc.args = req.query.args
+			cmd = new NAR.Cmd doc
+			cmd.exec()
+			.then ->
+				console.log ">> Exec cmd: #{cmd.name}".cyan
+				res.send 200
+			.catch (e) ->
+				console.error ">> Exec error: #{cmd.name}".red
+				res.send 500
+			.done()

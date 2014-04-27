@@ -13,6 +13,7 @@ class NAR.Archr extends NB.Module
 		data = {
 			head: @r.render('assets/ejs/head.ejs')
 			foot: @r.render('assets/ejs/foot.ejs')
+			assets: @r.render('archr/client/ejs/assets.ejs')
 			name: @name
 		}
 

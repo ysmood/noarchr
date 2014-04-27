@@ -18,11 +18,22 @@
 			<input id="cmder" type="text" class="form-control" placeholder="command">
 		</div>
 
+		<hr>
+
+		<div>
+			<button id='btn-add-cmd' class="btn btn-primary">Add</button>
+		</div>
+
 	</div>
+
+	<?- assets ?>
 
 	<?- foot ?>
 
-	<?- _.js(_.u() + name + '/js/' + name + '.js') ?>
+	<?- _.js(
+		_.u() + name + '/js/' + 'jsoneditor.js',
+		_.u() + name + '/js/' + name + '.js'
+	) ?>
 
 	<script type="text/javascript">
 		NAR.archr = new NAR.Archr();
