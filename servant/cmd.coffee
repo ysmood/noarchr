@@ -29,10 +29,13 @@ class NAR.Cmd
 
 	init_open_cmd: ->
 		switch process.platform
+			# mac
 			when 'darwin'
 				@open_cmd = 'open'
+			# widnows
 			when 'win32'
 				@open_cmd = 'start'
+			# linux
 			when 'linux'
 				@open_cmd = null
 
@@ -44,12 +47,13 @@ class NAR.Cmd
 			when 'open'
 				argv = if @args then @cmd_data.concat(@args) else @cmd_data
 				os.spawn @open_cmd, argv
+
 			when 'run'
 				os.spawn(
 					@cmd_data.bin
 					@cmd_data.args
 				)
+
 			when 'js'
 				Q.fcall =>
 					eval @cmd_data
-

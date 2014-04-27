@@ -23,12 +23,6 @@ class NAR.Archr
 
 		@$cmder.focus()
 
-	exec_cmd: =>
-		if @$cmder.is(':focus')
-			$.get('/cmd/exec', { name: @cmd_name })
-			.done (data) ->
-				console.log data
-
 	init_cmd_add: ->
 		self = @
 		$btn = $('#btn-add-cmd')
@@ -103,3 +97,9 @@ class NAR.Archr
 		$.post('/cmd/add', cmd)
 		.done (data) ->
 			console.log data
+
+	exec_cmd: =>
+		if @$cmder.is(':focus')
+			$.get('/cmd/exec/' + @cmd_name)
+			.done (data) ->
+				console.log data
